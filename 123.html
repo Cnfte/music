@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可放大拖动的3D球体</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .container {
+            perspective: 1000px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sphere {
+            width: 200px;
+            height: 200px;
+            background-color: #3498db;
+            border-radius: 50%;
+            position: absolute;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* 放大和缩小球体 */
+        .zoomed {
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sphere" id="sphere"></div>
+</div>
+
+<script>
+    const sphere = document.getElementById('sphere');
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    // 拖动球体的事件
+    sphere.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - sphere.offsetLeft;
+        offsetY = e.clientY - sphere.offsetTop;
+        sphere.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const x = e.clientX - offsetX;
+            const y = e.clientY - offsetY;
+            sphere.style.left = `${x}px`;
+            sphere.style.top = `${y}px`;
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        sphere.style.cursor = 'grab';
+    });
+
+    // 放大球体
+    sphere.addEventListener('click', () => {
+        sphere.classList.toggle('zoomed');
+    });
+</script>
+
+</body>
+</html>
