@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js 光照系统示例</title>
+    <title>Three.js 立方体旋转示例</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -26,17 +26,17 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // 创建一个球体几何体
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    // 创建一个立方体几何体（3x3x3）
+    const geometry = new THREE.BoxGeometry(3, 3, 3);
     
-    // 创建一个材质，并应用到球体
+    // 创建一个材质，并应用到立方体
     const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
     
-    // 创建一个球体网格
-    const sphere = new THREE.Mesh(geometry, material);
+    // 创建一个立方体网格
+    const cube = new THREE.Mesh(geometry, material);
     
-    // 将球体添加到场景中
-    scene.add(sphere);
+    // 将立方体添加到场景中
+    scene.add(cube);
 
     // 创建一个点光源，模拟真实的灯光效果
     const pointLight = new THREE.PointLight(0xffffff, 1, 100);
@@ -50,15 +50,15 @@
     scene.add(ambientLight);
     
     // 设置相机的位置
-    camera.position.z = 5;
+    camera.position.z = 7;
 
     // 创建渲染循环
     function animate() {
         requestAnimationFrame(animate);
         
-        // 让球体旋转以显示光照效果
-        sphere.rotation.x += 0.01;
-        sphere.rotation.y += 0.01;
+        // 让立方体旋转
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
 
         // 渲染场景
         renderer.render(scene, camera);
