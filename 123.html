@@ -24,6 +24,10 @@
     // 创建 WebGL 渲染器并将其附加到 HTML 页面
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // 设置背景色为白色
+    renderer.setClearColor(0xffffff, 1);  // 0xffffff 是白色，第二个参数为透明度（1表示完全不透明）
+    
     document.body.appendChild(renderer.domElement);
 
     // 创建一个立方体几何体（3x3x3）
