@@ -27,31 +27,34 @@
     </style>
 </head>
 <body>
-    <h1>浏览器内核检测</h1>
-    <p id="browser-engine"></p>
+    <h1>浏览器内核版本检测</h1>
+    <p id="browser-version"></p>
 
     <script>
         // 获取用户的 User Agent
         var userAgent = navigator.userAgent;
-        var engine;
+        var browserInfo = "未知浏览器内核和版本";
 
-        // 检测浏览器内核
+        // 检测浏览器内核和版本
         if (userAgent.indexOf("Chrome") > -1) {
-            engine = "Blink内核 (Chrome)";
+            var version = userAgent.match(/Chrome\/([0-9.]+)/);
+            browserInfo = version ? "Blink内核 (Chrome) 版本: " + version[1] : "Blink内核 (Chrome)";
         } else if (userAgent.indexOf("Firefox") > -1) {
-            engine = "Gecko内核 (Firefox)";
+            var version = userAgent.match(/Firefox\/([0-9.]+)/);
+            browserInfo = version ? "Gecko内核 (Firefox) 版本: " + version[1] : "Gecko内核 (Firefox)";
         } else if (userAgent.indexOf("Safari") > -1) {
-            engine = "WebKit内核 (Safari)";
+            var version = userAgent.match(/Version\/([0-9.]+)/);
+            browserInfo = version ? "WebKit内核 (Safari) 版本: " + version[1] : "WebKit内核 (Safari)";
         } else if (userAgent.indexOf("Trident") > -1) {
-            engine = "Trident内核 (Internet Explorer)";
+            var version = userAgent.match(/rv:([0-9.]+)/);
+            browserInfo = version ? "Trident内核 (Internet Explorer) 版本: " + version[1] : "Trident内核 (Internet Explorer)";
         } else if (userAgent.indexOf("Edge") > -1) {
-            engine = "EdgeHTML内核 (Edge)";
-        } else {
-            engine = "未知内核";
+            var version = userAgent.match(/Edge\/([0-9.]+)/);
+            browserInfo = version ? "EdgeHTML内核 (Edge) 版本: " + version[1] : "EdgeHTML内核 (Edge)";
         }
 
-        // 在网页中显示浏览器内核
-        document.getElementById("browser-engine").textContent = "您的浏览器内核是: " + engine;
-                   </script>
+        // 在网页中显示浏览器内核和版本
+        document.getElementById("browser-version").textContent = "您的浏览器内核及版本是: " + browserInfo;
+    </script>
 </body>
 </html>
