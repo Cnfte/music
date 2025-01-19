@@ -15,6 +15,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 200px;
         }
     </style>
 </head>
@@ -27,33 +28,27 @@
 
     <script>
         function updateTimes() {
-            // 获取当前时间
             const now = new Date();
-            const bjTime = new Date(now);
-            const mskTime = new Date(now);
-            const tkyTime = new Date(now);
+
+            // 北京时间 (UTC+8)
+            const bjTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+            document.getElementById('bj-time').innerText = bjTime.toLocaleString();
+
+            // 莫斯科时间 (UTC+3)
+            const mskTime = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+            document.getElementById('msk-time').innerText = mskTime.toLocaleString();
+
+            // 东京时间 (UTC+9)
+            const tkyTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+            document.getElementById('tky-time').innerText = tkyTime.toLocaleString();
+
+            // 国际标准时间 (UTC)
             const utcTime = new Date(now);
-            const parTime = new Date(now);
+            document.getElementById('utc-time').innerText = utcTime.toISOString().replace('T', ' ').replace(/\..*/, '');
 
-            // 北京时间
-            bjTime.setHours(bjTime.getHours() + 8); // 偏移8小时
-            document.getElementById('北京时间').innerText = bjTime.toLocaleString();
-
-            // 莫斯科时间
-            mskTime.setHours(mskTime.getHours() + 3); // 偏移3小时
-            document.getElementById('莫斯科时间').innerText = mskTime.toLocaleString();
-
-            // 东京时间
-            tkyTime.setHours(tkyTime.getHours() + 9); // 偏移9小时
-            document.getElementById('东京时间').innerText = tkyTime.toLocaleString();
-
-            // 国际标准时间
-            utcTime.setHours(utcTime.getHours() - 8); // 偏移8小时
-            document.getElementById('UTC标准时间').innerText = utcTime.toLocaleString();
-
-            // 巴黎时间
-            parTime.setHours(parTime.getHours() + 2); // 偏移2小时
-            document.getElementById('巴黎时间').innerText = parTime.toLocaleString();
+            // 巴黎时间 (UTC+2)
+            const parTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+            document.getElementById('par-time').innerText = parTime.toLocaleString();
         }
 
         // 每秒更新一次时间
